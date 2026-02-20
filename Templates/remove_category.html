@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Remove Category</title>
+</head>
+<body>
+	<div class="box">
+		<div class="back">
+			<a href ="{{url_for('admin_dashboard',curr_login_id=curr_login_id)}}" class="back">Dashboard</a>
+		</div>	
+		<h1>Remove Category</h1>
+		<p> Are you sure,you want to remove this category '{{category.name}}'?</p>
+		<form method="POST">
+			<div>
+				<input type="submit" value="Confirm">
+			</div>
+		</form>
+	</div>
+</body>
+</html>
