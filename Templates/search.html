@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Search Results</title>
+</head>
+<body>
+	<div class="container">
+		<div class="back">
+			<a href ="{{url_for('customer_dashboard',curr_login_id=curr_login_id)}}" class="back">Home</a>
+		</div>
+		<h1>Search Results for '{{search_query}}'</h1>
+		{%if products%}
+		<div class="prod-list">
+			{%for product in products%}
+			<div class="prod">
+				<h2 class="prod-name">{{product.name}}</h2>
+				<p class="prodprice">Price:{{product.price}}</p>
+				<p class="prodprice">Unit:{{product.unit}}</p>
+				<p class="prodprice">Quantity:{{product.quantity}}</p>
+				<p class="prodprice">Mf Dates:{{product.mf_date}}</p>
+				<p class="prodprice">Expiry Date{{product.expiry_date}}</p>
+				<form method="POST"
+					action="{{url_for('customer_add_to_cart',curr_login_id=curr_login_id,product_id=product.id)}}">
+					<input type="number" name="quantity" value="1" max="{{product.quantity}}">
+					<button type="submit" class="add">Add to cart</button>
+				</form>
+			</div>
+			{%endfor%}
+		</div>
+		{%endif%}
+		{%if categories%}
+		<div class="Cate">
+			{%for category in categories%}
+			<div class="cate-name">
+				<h2 class="cate-name">{{category.name}}</h2>
+				<div class="prodprice">
+					{%for product in category.products%}
+					<div class="cate-prod">
+						<h2 class="prod-name">{{product.name}}</h2>
+						<p class="prodprice">Price:{{product.price}}</p>
+						<p class="prodprice">Unit:{{product.unit}}</p>
+						<p class="prodprice">Quantity:{{product.quantity}}</p>
+						<p class="prodprice">Mf Dates:{{product.mf_date}}</p>
+						<p class="prodprice">Expiry Date{{product.expiry_date}}</p>
+						<form method="POST"
+							action="{{url_for('customer_add_to_cart',curr_login_id=curr_login_id,product_id=product.id)}}">
+							<input type="number" name="quantity" value="1" max="{{product.quantity}}">
+							<button type="submit" class="add">Add to cart</button>
+						</form>
+					</div>
+					{%endfor%}
+				</div>
+			</div>
+			{%endfor%}
+		</div>
+		{%endif%}	
+		{%if not product and not categories%}
+		<p class="no">No Result Found</p>
+		{%endif%}
+
+	</div>	
+</body>
+</html>
